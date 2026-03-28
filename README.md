@@ -10,7 +10,7 @@ The project starts from earlier BLIP-2 / GPT-2 experiments, then converges to a 
 - **decoding ablation**
 - **CLIP-based reranking**
 
-The final notebook identifies the strongest captioning pipeline in the repository and documents the full progression from baseline caption generation to a stronger reranked system.
+The final notebook documents the full progression from baseline caption generation to a stronger reranked system.
 
 ---
 
@@ -21,7 +21,7 @@ Image captioning combines **Computer Vision** and **Natural Language Processing*
 Rather than stopping at a single pretrained baseline, this project explores a structured improvement path:
 
 1. establish strong baselines,
-2. compare model sizes,
+2. compare model scales,
 3. test **full fine-tuning** vs **parameter-efficient adaptation**,
 4. study **decoding strategy effects**,
 5. and improve final outputs through **CLIP-based image-text reranking**.
@@ -157,11 +157,12 @@ Minimum and maximum length constraints help keep captions closer to the datasetâ
 ## Experiment Progression
 
 ```mermaid
+%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 40, 'rankSpacing': 55}} }%%
 flowchart LR
-    V1[V1: BLIP-2 Baseline]
-    V2[V2: Advanced BLIP-2]
-    V3[V3: BLIP-2 / GPT-2 / CLIP Ensemble Comparisons]
-    V4[V4: Final BLIP-Family Fine-Tuning + Reranking]
+    V1[Notebook v1<br/>BLIP-2 Baseline]
+    V2[Notebook v2<br/>Advanced BLIP-2]
+    V3[Notebook v3<br/>BLIP-2 + GPT-2 + CLIP Comparison]
+    V4[Notebook v4<br/>Final BLIP-Family Fine-Tuning<br/>and CLIP Reranking]
 
     V1 --> V2 --> V3 --> V4
 ```
@@ -176,15 +177,15 @@ flowchart LR
 | BLIP-2 Advanced (No Fine-Tune) | Historical baseline | **0.38372** |
 | GPT-2 Advanced (No Fine-Tune) | Historical baseline | **0.47089** |
 
-### Final Notebook Results
+### Final Notebook (V4) Results
 | Model | Category | Local Proxy FGD |
 |---|---:|---:|
-| BLIP-base Baseline | Current notebook | **0.25076** |
-| BLIP-large Baseline | Current notebook | **0.22356** |
-| BLIP-base Full Fine-Tuned | Current notebook | **0.18750** |
-| BLIP-large LoRA Fine-Tuned | Current notebook | **0.16674** |
-| Best Decoding Variant | Current notebook | **0.16617** |
-| Final CLIP-Reranked Pipeline | Current notebook | **0.16428** |
+| BLIP-base Baseline | Final notebook (V4) | **0.25076** |
+| BLIP-large Baseline | Final notebook (V4) | **0.22356** |
+| BLIP-base Full Fine-Tuned | Final notebook (V4) | **0.18750** |
+| BLIP-large LoRA Fine-Tuned | Final notebook (V4) | **0.16674** |
+| Best Decoding Variant | Final notebook (V4) | **0.16617** |
+| Final CLIP-Reranked Pipeline | Final notebook (V4) | **0.16428** |
 
 **Key takeaway:** the strongest result was achieved by combining **BLIP-large LoRA fine-tuning**, **improved beam-search decoding**, and **CLIP-based reranking**.
 
@@ -258,50 +259,3 @@ It includes:
 - decoding ablation
 - CLIP reranking
 - final comparison tables and visualizations
-
-### `deprecated/`
-Contains older and intermediate experiments kept for documentation purposes.
-
----
-
-## Why This Repository Matters
-
-This repository goes beyond a simple image captioning demo. It includes:
-
-- baseline construction
-- structured model comparison
-- full fine-tuning
-- parameter-efficient adaptation
-- decoding ablation
-- CLIP-based reranking
-- quantitative comparison
-- qualitative analysis
-
-In that sense, it serves as both:
-- a practical image captioning project,
-- and a compact model-development study.
-
----
-
-## Final Conclusion
-
-The project shows that the best results did not come from model size alone. The strongest improvement emerged from combining:
-
-- a strong BLIP-family captioning backbone,
-- an effective adaptation strategy,
-- improved decoding,
-- and CLIP-based image-text-aware reranking.
-
-The final best pipeline in this repository is:
-
-> **BLIP-large LoRA Fine-Tuned + improved beam-search decoding + CLIP-based reranking**
-
-with a best local proxy FGD of:
-
-> **0.16428**
-
----
-
-## License
-
-This project is released under the terms of the repository `LICENSE` file.
